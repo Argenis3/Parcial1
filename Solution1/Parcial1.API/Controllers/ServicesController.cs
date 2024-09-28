@@ -6,26 +6,25 @@ using Parcial1.Shared.Entities;
 namespace Parcial1.API.Controllers
 {
     [ApiController]
-    [Route("/api/vehicles")]
-    public class VehiclesController:ControllerBase
+    [Route("/api/services")]
+    public class ServicesController:ControllerBase
     {
         private readonly DataContext dataContext;
-
-        public VehiclesController(DataContext dataContext)
+        public ServicesController(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok(await dataContext.Vehicles.ToListAsync());
+            return Ok(await dataContext.Services.ToListAsync());
         }
         [HttpPost]
-        public async Task<IActionResult> PostAsync(Vehicle vehicle)
+        public async Task<IActionResult> PostAsync(Service service)
         {
-            dataContext.Vehicles.Add(vehicle);  
+            dataContext.Services.Add(service);
             await dataContext.SaveChangesAsync();
-            return Ok(vehicle);
+            return Ok(service);
         }
     }
 }

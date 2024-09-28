@@ -1,31 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Parcial1.API.Data;
+using Microsoft.EntityFrameworkCore;
 using Parcial1.Shared.Entities;
 
 namespace Parcial1.API.Controllers
 {
     [ApiController]
-    [Route("/api/vehicles")]
-    public class VehiclesController:ControllerBase
+    [Route("/api/packages")]
+    public class PackagesController:ControllerBase
     {
         private readonly DataContext dataContext;
-
-        public VehiclesController(DataContext dataContext)
+        public PackagesController(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok(await dataContext.Vehicles.ToListAsync());
+            return Ok(await dataContext.Packages.ToListAsync());
         }
         [HttpPost]
-        public async Task<IActionResult> PostAsync(Vehicle vehicle)
+        public async Task<IActionResult> PostAsync(Package package)
         {
-            dataContext.Vehicles.Add(vehicle);  
+            dataContext.Packages.Add(package);
             await dataContext.SaveChangesAsync();
-            return Ok(vehicle);
+            return Ok(package);
         }
     }
 }
